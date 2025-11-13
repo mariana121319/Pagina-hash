@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Hashes - Seguridad Digital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Fondo animado con partículas -->
+    <canvas id="particles"></canvas>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+            </div>
+            <h1 class="title">Verificador de Hashes</h1>
+            <p class="subtitle">Seguridad Digital & Criptografía</p>
+        </header>
+
+        <!-- Sección de información -->
+        <section class="info-section">
+            <div class="info-card">
+                <div class="info-icon">ℹ️</div>
+                <h2>¿Qué son los Hashes?</h2>
+                <p>Los hashes son identificadores únicos generados por algoritmos criptográficos que permiten verificar la integridad de los archivos. Si un archivo se modifica, su hash cambia completamente.</p>
+                <div class="hash-types">
+                    <span class="badge">MD5</span>
+                    <span class="badge">SHA-1</span>
+                    <span class="badge">SHA-256</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botones de aplicaciones -->
+        <section class="apps-section">
+            <h2 class="section-title">Selecciona una aplicación</h2>
+            <div class="buttons-container">
+                <button class="app-button" data-app="plink">
+                    <div class="button-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <path d="M9 9h.01M15 9h.01M9 15h6"/>
+                        </svg>
+                    </div>
+                    <span class="button-text">Plink</span>
+                    <span class="button-subtitle">Command-line connection tool</span>
+                </button>
+
+                <button class="app-button" data-app="putty">
+                    <div class="button-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                        </svg>
+                    </div>
+                    <span class="button-text">Putty</span>
+                    <span class="button-subtitle">SSH and telnet client</span>
+                </button>
+
+                <button class="app-button" data-app="virtualbox">
+                    <div class="button-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2"/>
+                            <path d="M16 3h2a2 2 0 012 2v2M8 3H6a2 2 0 00-2 2v2"/>
+                        </svg>
+                    </div>
+                    <span class="button-text">VirtualBox 7.0.8</span>
+                    <span class="button-subtitle">Virtualization software</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Mensaje de feedback -->
+        <div class="feedback-message" id="feedbackMessage">
+            <span class="feedback-icon">✨</span>
+            <span class="feedback-text">¡Genial! Aquí están los hashes.</span>
+        </div>
+
+        <!-- Sección de resultados -->
+        <section class="results-section" id="resultsSection">
+            <div class="results-card">
+                <div class="results-header">
+                    <h3 id="appName"></h3>
+                    <button class="close-button" id="closeButton">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="hashes-container">
+                    <div class="hash-item">
+                        <div class="hash-header">
+                            <span class="hash-label">MD5</span>
+                            <button class="copy-button" data-hash="md5">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                        <code class="hash-value" id="md5Hash"></code>
+                    </div>
+
+                    <div class="hash-item">
+                        <div class="hash-header">
+                            <span class="hash-label">SHA-1</span>
+                            <button class="copy-button" data-hash="sha1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                        <code class="hash-value" id="sha1Hash"></code>
+                    </div>
+
+                    <div class="hash-item">
+                        <div class="hash-header">
+                            <span class="hash-label">SHA-256</span>
+                            <button class="copy-button" data-hash="sha256">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                        <code class="hash-value" id="sha256Hash"></code>
+                    </div>
+                </div>
+
+                <div class="verification-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <p>Verifica estos hashes después de descargar el archivo para asegurar su autenticidad e integridad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🔒 Seguridad Digital · Verificación de Integridad · Criptografía</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
